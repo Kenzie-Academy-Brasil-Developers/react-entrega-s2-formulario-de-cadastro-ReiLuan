@@ -14,12 +14,11 @@ function App() {
         <Route exact path="/home">
           <Home />
         </Route>
-        <div className="container">
-          <Route path="/form">
-            <Form />
-          </Route>
-        </div>
-        ]
+
+        <Route path="/form">
+          {/* <div className="container"> */}
+          <Form />
+        </Route>
       </Switch>
     </div>
   );

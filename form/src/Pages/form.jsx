@@ -15,13 +15,13 @@ const Form = () => {
       .min(8, "Senha muito curta")
       .matches(
         "Minimo 8 caracteres, Maiuscula, Minuscula, Um numero e um simbolo especial"
-      ).password,
+      ),
     confirmPassword: yup
       .string()
       .required("Confirme sua senha")
-      .oneOf([yup.ref("password"), null]),
+      .oneOf([yup.ref("password"), "senhas invalidas"]),
   });
-
+  const history = useHistory();
   const {
     register,
     handleSubmit,
@@ -30,19 +30,17 @@ const Form = () => {
     resolver: yupResolver(formSchema),
   });
 
-  const signIn = (data) => {};
+  const signIn = (data) => {
+    history.push("/home");
+  };
 
   console.log(errors);
-  const history = useHistory();
 
   return (
     <div className="Header">
       <div className="container">
         <h3>Formulário</h3>
-        <form
-          className="form"
-          onSubmit={(handleSubmit(signIn), () => history.push("/home"))}
-        >
+        <form className="form" onSubmit={handleSubmit(signIn)}>
           <input placeholder="Nome:" {...register("name")} />
           {errors.name?.message}
           <input placeholder="Email:" {...register("email")} />
